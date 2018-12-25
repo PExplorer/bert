@@ -330,6 +330,10 @@ class MrpcProcessor(DataProcessor):
         label = "0"
       else:
         label = tokenization.convert_to_unicode(line[4])
+      if i%1000==0:
+        print(guid)
+        print(text_a)
+        print(text_b)
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
     return examples
