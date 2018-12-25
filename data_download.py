@@ -25,5 +25,5 @@ under_sample_2 = under_sampling(df)
 under_sample_2.to_csv('glue_data/dev_MS.csv')
 
 eval_data = pd.read_table("eval1_unlabelled.tsv", header=None)
-eval_data.to_csv("glue_data/eval_MS.csv")
+eval_data.to_csv("glue_data/test_MS.csv")
 
