@@ -25,7 +25,6 @@ import modeling
 import optimization
 import tokenization
 import tensorflow as tf
-import pandas as pd
 
 flags = tf.flags
 
@@ -130,6 +129,7 @@ class InputExample(object):
 
   def __init__(self, guid, text_a, text_b=None, label=None):
     """Constructs a InputExample.
+
     Args:
       guid: Unique id for the example.
       text_a: string. The untokenized text of the first sequence. For single
@@ -147,10 +147,12 @@ class InputExample(object):
 
 class PaddingInputExample(object):
   """Fake example so the num input examples is a multiple of the batch size.
+
   When running eval/predict on the TPU, we need to pad the number of examples
   to be a multiple of the batch size, because the TPU requires a fixed batch
   size. The alternative is to drop the last batch, which is bad because it means
   the entire output data won't be generated.
+
   We use this class instead of `None` because treating `None` as padding
   battches could cause silent errors.
   """
@@ -193,6 +195,7 @@ class DataProcessor(object):
 
   @classmethod
   def _read_tsv(cls, input_file, quotechar=None):
+    """Reads a tab separated value file."""
     """Reads a tab separated value file."""
     import pandas as pd
     data_csv = pd.read_csv(input_file)
@@ -283,9 +286,9 @@ class MnliProcessor(DataProcessor):
     for (i, line) in enumerate(lines):
       if i == 0:
         continue
-      guid = "%s-%s" % (line[0],line[5])
-      text_a = tokenization.convert_to_unicode(line[1])
-      text_b = tokenization.convert_to_unicode(line[2])
+      guid = "%s-%s" % (set_type, tokenization.convert_to_unicode(line[0]))
+      text_a = tokenization.convert_to_unicode(line[8])
+      text_b = tokenization.convert_to_unicode(line[9])
       if set_type == "test":
         label = "contradiction"
       else:
@@ -301,17 +304,17 @@ class MrpcProcessor(DataProcessor):
   def get_train_examples(self, data_dir):
     """See base class."""
     return self._create_examples(
-        self._read_tsv(os.path.join(data_dir, "train_MS.csv")), "train")
+        self._read_tsv(os.path.join(data_dir, "train.csv")), "train")
 
   def get_dev_examples(self, data_dir):
     """See base class."""
     return self._create_examples(
-        self._read_tsv(os.path.join(data_dir, "dev_MS.csv")), "dev")
+        self._read_tsv(os.path.join(data_dir, "dev.csv")), "dev")
 
   def get_test_examples(self, data_dir):
     """See base class."""
     return self._create_examples(
-        self._read_tsv(os.path.join(data_dir, "test_MS.csv")), "test")
+        self._read_tsv(os.path.join(data_dir, "test.csv")), "test")
 
   def get_labels(self):
     """See base class."""
@@ -580,7 +583,6 @@ def _truncate_seq_pair(tokens_a, tokens_b, max_length):
 def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
                  labels, num_labels, use_one_hot_embeddings):
   """Creates a classification model."""
-  import modeling
   model = modeling.BertModel(
       config=bert_config,
       is_training=is_training,
@@ -626,12 +628,11 @@ def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
 def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
                      num_train_steps, num_warmup_steps, use_tpu,
                      use_one_hot_embeddings):
-  import modeling
   """Returns `model_fn` closure for TPUEstimator."""
 
   def model_fn(features, labels, mode, params):  # pylint: disable=unused-argument
     """The `model_fn` for TPUEstimator."""
-    import modeling
+
     tf.logging.info("*** Features ***")
     for name in sorted(features.keys()):
       tf.logging.info("  name = %s, shape = %s" % (name, features[name].shape))
@@ -789,14 +790,6 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
 
 
 def main(_):
-  import collections
-  import csv
-  import os
-  import modeling
-  import optimization
-  import tokenization
-  import tensorflow as tf
-  import pandas as pd
   tf.logging.set_verbosity(tf.logging.INFO)
 
   processors = {
