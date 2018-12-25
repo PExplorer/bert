@@ -199,8 +199,8 @@ class DataProcessor(object):
     for row in data_csv_values:
       row_list = []
       for value in row:
-        row_list.append(str(value)
-	lines.append(row_list)
+        row_list.append(str(value))
+      lines.append(row_list)
     return lines
 
 
