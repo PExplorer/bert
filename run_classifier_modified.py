@@ -193,9 +193,9 @@ class DataProcessor(object):
   @classmethod
   def _read_tsv(cls, input_file, quotechar=None):
     """Reads a tab separated value file."""
-	data_csv = pd.read_csv(input_file)
-	data_csv_values = data_csv.values
-	lines = []
+    data_csv = pd.read_csv(input_file)
+    data_csv_values = data_csv.values
+    lines = []
     for row in data_csv_values:
       row_list = []
       for value in row:
