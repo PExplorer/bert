@@ -200,7 +200,7 @@ class DataProcessor(object):
       row_list = []
       for value in row:
         row_list.append(str(value)
-	  lines.append(row_list)
+	lines.append(row_list)
     return lines
 
 
