@@ -22,6 +22,7 @@ under_sample_1 = under_sampling(df)
 under_sample_1.to_csv('glue_data/MRPC/train_MS.csv')
 
 under_sample_2 = under_sampling(df)
+under_sample_2 = under_sample_2.sample(10000)
 under_sample_2.to_csv('glue_data/MRPC/dev_MS.csv')
 
 eval_data = pd.read_table("eval1_unlabelled.tsv", header=None)
