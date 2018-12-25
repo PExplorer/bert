@@ -19,11 +19,11 @@ def under_sampling(train_df):
     return under_sample
 
 under_sample_1 = under_sampling(df)
-under_sample_1.to_csv('glue_data/train_MS.csv')
+under_sample_1.to_csv('glue_data/MRPC/train_MS.csv')
 
 under_sample_2 = under_sampling(df)
-under_sample_2.to_csv('glue_data/dev_MS.csv')
+under_sample_2.to_csv('glue_data/MRPC/dev_MS.csv')
 
 eval_data = pd.read_table("eval1_unlabelled.tsv", header=None)
-eval_data.to_csv("glue_data/test_MS.csv")
+eval_data.to_csv("glue_data/MRPC/test_MS.csv")
 
