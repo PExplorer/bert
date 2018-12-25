@@ -337,7 +337,7 @@ class MrpcProcessor(DataProcessor):
       if i%1000==0:
         print(guid)
         print(text_a)
-        print(text_b)
+        print(label)
 	#print(label)
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
