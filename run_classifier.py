@@ -333,7 +333,7 @@ class MrpcProcessor(DataProcessor):
       if set_type == "test":
         label = "0"
       else:
-        label = str(okenization.convert_to_unicode(line[4]))
+        label = str(tokenization.convert_to_unicode(line[4]))
       print(label)
 #       if i%1000==0:
 #         print("guid--" + guid)
