@@ -338,7 +338,7 @@ class MrpcProcessor(DataProcessor):
         print(guid)
         print(text_a)
         print(text_b)
-	print(label)
+	#print(label)
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
     return examples
