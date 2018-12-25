@@ -335,8 +335,11 @@ class MrpcProcessor(DataProcessor):
       else:
         label = tokenization.convert_to_unicode(line[4])
       if i%1000==0:
+	print("guid--")
         print(guid)
+	print("text--a")
         print(text_a)
+	print("label--")
         print(label)
 	#print(label)
       examples.append(
