@@ -281,7 +281,7 @@ class MnliProcessor(DataProcessor):
     for (i, line) in enumerate(lines):
       if i == 0:
         continue
-      guid = "%s-%s" % (line[0],line[5))
+      guid = "%s-%s" % (line[0],line[5])
       text_a = tokenization.convert_to_unicode(line[1])
       text_b = tokenization.convert_to_unicode(line[2])
       if set_type == "test":
