@@ -25,6 +25,7 @@ import modeling
 import optimization
 import tokenization
 import tensorflow as tf
+import pandas as pd
 
 flags = tf.flags
 
@@ -326,7 +327,7 @@ class MrpcProcessor(DataProcessor):
     for (i, line) in enumerate(lines):
       if i == 0:
         continue
-      guid = "%s-%s" % (line[1],line[5])
+      guid = "%s-%s" % (set_type,i)
       text_a = tokenization.convert_to_unicode(line[2])
       text_b = tokenization.convert_to_unicode(line[3])
       if set_type == "test":
@@ -337,6 +338,7 @@ class MrpcProcessor(DataProcessor):
         print(guid)
         print(text_a)
         print(text_b)
+		print(label)
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
     return examples
