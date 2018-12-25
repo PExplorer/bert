@@ -321,9 +321,9 @@ class MrpcProcessor(DataProcessor):
     for (i, line) in enumerate(lines):
       if i == 0:
         continue
-      guid = "%s-%s" % (line[0],line[5])
-      text_a = tokenization.convert_to_unicode(line[1])
-      text_b = tokenization.convert_to_unicode(line[2])
+      guid = "%s-%s" % (line[1],line[5])
+      text_a = tokenization.convert_to_unicode(line[2])
+      text_b = tokenization.convert_to_unicode(line[3])
       if set_type == "test":
         label = "0"
       else:
