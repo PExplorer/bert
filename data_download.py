@@ -19,7 +19,7 @@ def under_sampling(train_df):
     return under_sample
 
 under_sample_1 = under_sampling(df)
-under_sample_1 = under_sample_1.sample(300000)
+under_sample_1 = under_sample_1.sample(30000)
 under_sample_1.to_csv('glue_data/MRPC/train_MS.csv')
 
 under_sample_2 = under_sampling(df)
