@@ -783,6 +783,14 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
 
 
 def main(_):
+  import collections
+  import csv
+  import os
+  import modeling
+  import optimization
+  import tokenization
+  import tensorflow as tf
+  import pandas as pd
   tf.logging.set_verbosity(tf.logging.INFO)
 
   processors = {
